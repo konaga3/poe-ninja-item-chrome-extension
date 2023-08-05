@@ -208,28 +208,45 @@ else if(league.includes('hc')){
 }
 const defaultUrl = `https://www.pathofexile.com/trade/search/${leagueURL}?q=`;
 
-let body = document.querySelector("#main");
-let textarea = document.createElement("textarea");
-textarea.type = "text";
-textarea.rows = "2";
-textarea.cols = "50";
-body.prepend(textarea);
+const jsInitCheckTimer = setInterval(jsLoaded, 1000);
+let clipboardInterval;
+function jsLoaded() {
+    if (document.getElementById("main") != null) {
+        clearInterval(jsInitCheckTimer);
+        var buttons = [...document.getElementsByClassName("button")];
+        buttons.forEach((button, index) => {
+            if (button.title === "Copy Path of Building item code") {
+                button.onclick = () => { 
+                  clipboardInterval = setInterval(readClipboard, 1000); 
+                }
+            }
+        });
+    };
+};
 
-let btn = document.createElement("button");
-btn.innerHTML = "URL生成";
 
-btn.onclick = () => {
+async function readClipboard() {
+  clearInterval(clipboardInterval);
+  let text = '';
+  text = await navigator.clipboard.readText();
+  while(true){
+    if(text!==''){
+      //console.log(text);
+      text=text.replaceAll('\r','');
+      autoSearch(text);
+      break;
+    }
+  }
+}
+
+function autoSearch(text){
   statsJson = JSON.parse(JSON.stringify(defaultJson.stats));
   filtersJson = JSON.parse(JSON.stringify(defaultJson.filters));
   jsonQuery = { query: JSON.parse(JSON.stringify(defaultJson.query)) };
 
-  const completeUrl = setInput(textarea.value);
+  const completeUrl = setInput(text);
   if (completeUrl !== undefined) {
     console.log(completeUrl);
     window.open(completeUrl);
   }
-  textarea.value = "";
-};
-
-let target = document.getElementById("main");
-target.appendChild(btn);
+}
