@@ -1,0 +1,26 @@
+{
+  "query": {
+    "status": { "option": "online" }
+  },
+  "stats": [
+    {
+      "type": "and",
+      "filters": [],
+      "disabled": false
+    }
+  ],
+  "filters": {
+    "type_filters": {
+      "filters": {},
+      "disabled": false
+    },
+    "weapon_filters": {
+      "filters": {},
+      "disabled": false
+    },
+    "armour_filters": {
+      "filters": {},
+      "disabled": false
+    }
+  }
+}

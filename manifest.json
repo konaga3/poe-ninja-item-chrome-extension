@@ -1,0 +1,18 @@
+{
+	"manifest_version": 3,
+	"name": "poe ninja build",
+	"version": "1.0",
+	"description": "copy items from build and link to poe trade site",
+	"content_scripts": [
+	  {
+		"js": ["scripts/main.js"],
+		"matches": [
+		  "https://poe.ninja/builds/*/character/*"
+		]
+	  }
+	],
+	"web_accessible_resources" : [{
+        "resources" : [ "jsons/*.json" ],
+        "matches" : [ "https://*/*" ]
+}]
+  }
