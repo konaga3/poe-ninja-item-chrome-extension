@@ -219,15 +219,28 @@ function jsLoaded() {
           console.log(index);
         };
         let clone = button.cloneNode();
-        clone.textContent = "trade";
-        clone.style.right = clone.style.left;
-        clone.style.left = null;
+        clone.textContent = "Trade";
+        clone.title = "Copy Item Code and Jump to Trade Site";
         let parent = button.parentElement;
+        if (window.getComputedStyle(parent).width === "56px") {
+          clone.style.left = null;
+          const parentHeight = window.getComputedStyle(parent).height;
+          if(parentHeight === "56px"){
+            clone.style.top = "54px";
+          }
+          else if (parentHeight === "119px") {
+            clone.style.top = parentHeight;
+            clone.style.left = "8px";
+          }
+        } else {
+          clone.style.right = clone.style.left;
+          clone.style.left = null;
+        }
         parent.append(clone);
-        clone.onclick = () =>{
+        clone.onclick = () => {
           button.click();
           clipboardInterval = setInterval(readClipboard, 1000);
-        }
+        };
       }
     });
   }
