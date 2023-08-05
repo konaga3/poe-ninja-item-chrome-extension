@@ -9,7 +9,7 @@
 ・検索したいアイテムにカーソルを合わせると、「Copy」と出てくるのでそれをクリックしてコピー<br>
 ・上に表示されている空のテキストボックスにペーストして「URL生成」を押す<br>
 ・アイテムについているModで検索した状態のpoe.tradeサイトが表示される<br>
-![e130c4700da54301550494f552ed7bd3](https://github.com/konaga3/poe-ninja-item-chrome-extension/assets/141460315/c3a92fb5-2ce6-4838-83ec-e148fdf4a1cd)
+![6146b1083ea41604f624c6ea407bec5a](https://github.com/konaga3/poe-ninja-item-chrome-extension/assets/141460315/5aaf96fa-6887-44cb-b617-8a79e9578e3a)
 <br>
 ## 対応中
 ・Statsにおいて（Local）かどうかを判定しないと武器のModが正しく検索されない<br>
