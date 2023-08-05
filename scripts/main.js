@@ -198,48 +198,56 @@ var statsJson;
 var filtersJson;
 var jsonQuery;
 
-const league = location.href.split('/')[4];
+const league = location.href.split("/")[4];
 let leagueURL;
-if(league === 'challenge' || league === 'challengessf'){
-  leagueURL = 'Crusible';
-}
-else if(league.includes('hc')){
-  leagueURL = 'Hardcore%20Crucible';
+if (league === "challenge" || league === "challengessf") {
+  leagueURL = "Crusible";
+} else if (league.includes("hc")) {
+  leagueURL = "Hardcore%20Crucible";
 }
 const defaultUrl = `https://www.pathofexile.com/trade/search/${leagueURL}?q=`;
 
 const jsInitCheckTimer = setInterval(jsLoaded, 1000);
 let clipboardInterval;
 function jsLoaded() {
-    if (document.getElementById("main") != null) {
-        clearInterval(jsInitCheckTimer);
-        var buttons = [...document.getElementsByClassName("button")];
-        buttons.forEach((button, index) => {
-            if (button.title === "Copy Path of Building item code") {
-                button.onclick = () => { 
-                  clipboardInterval = setInterval(readClipboard, 1000); 
-                }
-            }
-        });
-    };
-};
-
+  if (document.getElementById("main") != null) {
+    clearInterval(jsInitCheckTimer);
+    var buttons = [...document.getElementsByClassName("button")];
+    buttons.forEach((button, index) => {
+      if (button.title === "Copy Path of Building item code") {
+        button.onclick = () => {
+          console.log(index);
+        };
+        let clone = button.cloneNode();
+        clone.textContent = "trade";
+        clone.style.right = clone.style.left;
+        clone.style.left = null;
+        let parent = button.parentElement;
+        parent.append(clone);
+        clone.onclick = () =>{
+          button.click();
+          clipboardInterval = setInterval(readClipboard, 1000);
+        }
+      }
+    });
+  }
+}
 
 async function readClipboard() {
   clearInterval(clipboardInterval);
-  let text = '';
+  let text = "";
   text = await navigator.clipboard.readText();
-  while(true){
-    if(text!==''){
+  while (true) {
+    if (text !== "") {
       //console.log(text);
-      text=text.replaceAll('\r','');
+      text = text.replaceAll("\r", "");
       autoSearch(text);
       break;
     }
   }
 }
 
-function autoSearch(text){
+function autoSearch(text) {
   statsJson = JSON.parse(JSON.stringify(defaultJson.stats));
   filtersJson = JSON.parse(JSON.stringify(defaultJson.filters));
   jsonQuery = { query: JSON.parse(JSON.stringify(defaultJson.query)) };
