@@ -222,13 +222,13 @@ function jsLoaded() {
         clone.textContent = "Trade";
         clone.title = "Copy Item Code and Jump to Trade Site";
         let parent = button.parentElement;
-        if (window.getComputedStyle(parent).width === "56px") {
+        if (Number(window.getComputedStyle(parent).width.replaceAll('px','')) < 100) {
           clone.style.left = null;
           const parentHeight = window.getComputedStyle(parent).height;
-          if(parentHeight === "56px"){
+          if(Number(parentHeight.replaceAll('px','')) < 100){
             clone.style.top = "54px";
           }
-          else if (parentHeight === "119px") {
+          else if (Number(parentHeight.replaceAll('px','')) > 110) {
             clone.style.top = parentHeight;
             clone.style.left = "8px";
           }
